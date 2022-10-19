@@ -1,0 +1,26 @@
+{
+  "name": "demo-connector1",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "plugin.name": "pgoutput",
+    "database.hostname": "db",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "postgres",
+    "database.server.name": "ARCTYPE",
+    "table.include.list": "public.t_user,public.document",
+    "transforms": "unwrap",
+    "transforms.unwrap.type":"io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones":"false",
+    "transforms.unwrap.delete.handling.mode":"rewrite",
+    "transforms.unwrap.add.fields":"op,table,lsn,source.ts_ms",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "false",
+    "snapshot.mode": "never",
+    "slot.name" : "slot1"
+  }
+}
